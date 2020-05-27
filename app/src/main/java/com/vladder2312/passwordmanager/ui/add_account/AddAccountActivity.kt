@@ -23,13 +23,15 @@ class AddAccountActivity : MvpAppCompatActivity(), AddAccountView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
         supportActionBar?.title = "Добавление аккаунта"
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initListeners()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add_account, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,21 +54,25 @@ class AddAccountActivity : MvpAppCompatActivity(), AddAccountView {
                 )
                 finish()
             } else {
-                Toast.makeText(applicationContext, "Введите данные во все поля", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Введите данные во все поля", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun initListeners(){
+    override fun initListeners() {
         generate_password_button.setOnClickListener {
-            startActivityForResult(Intent(applicationContext,GeneratorActivity::class.java), REQUEST_CODE)
+            startActivityForResult(
+                Intent(applicationContext, GeneratorActivity::class.java),
+                REQUEST_CODE
+            )
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode==REQUEST_CODE && resultCode==RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             password_add_account.setText(data?.getStringExtra("password"))
         }
     }

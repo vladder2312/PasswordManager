@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Менеджер паролей</string>
+    <string name="site_label">Сайт</string>
+    <string name="find">Найти</string>
+    <string name="add">Добавить</string>
+    <string name="login">Логин:</string>
+    <string name="password">Пароль:</string>
+    <string name="site_name">Название сайта</string>
+    <string name="site_url">Адрес сайта</string>
+    <string name="login_acc">Логин</string>
+    <string name="password_acc">Пароль</string>
+    <string name="description">Описание</string>
+    <string name="Done">Готово</string>
+    <string name="change">Изменить</string>
+    <string name="delete">Удалить</string>
+</resources>

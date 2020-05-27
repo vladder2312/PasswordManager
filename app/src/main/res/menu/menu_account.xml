@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="@string/change"
+        android:id="@+id/change_account_button"
+        app:showAsAction="never"/>
+    <item android:title="@string/delete"
+        android:id="@+id/delete_account_button"
+        app:showAsAction="never"/>
+    <item android:title="@string/Done"
+        android:id="@+id/done_account_button"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+</menu>

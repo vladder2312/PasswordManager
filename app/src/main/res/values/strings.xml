@@ -14,4 +14,11 @@
     <string name="change">Изменить</string>
     <string name="delete">Удалить</string>
     <string name="generate">Сгенерировать</string>
+    <string name="length">Длина</string>
+    <string name="symbols">Символы</string>
+    <string name="digits">Цифры</string>
+    <string name="eng">Английские</string>
+    <string name="rus">Русские</string>
+    <string name="complexity">Сложность</string>
+    <string name="generation_key">Ключ генерации</string>
 </resources>

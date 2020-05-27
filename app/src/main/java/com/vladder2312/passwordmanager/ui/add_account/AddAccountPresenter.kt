@@ -12,6 +12,7 @@ class AddAccountPresenter : MvpPresenter<AddAccountView>() {
 
     @Inject
     lateinit var accountsRepository: AccountsRepository
+    val model = AddAccountModel()
 
     init {
         App.appComponent.inject(this)

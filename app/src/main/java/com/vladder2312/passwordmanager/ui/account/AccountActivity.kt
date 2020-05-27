@@ -51,7 +51,7 @@ class AccountActivity : MvpAppCompatActivity(), AccountView {
         }
     }
 
-    private fun initViews() {
+    override fun initViews() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = intent.getStringExtra("siteName")
@@ -62,7 +62,7 @@ class AccountActivity : MvpAppCompatActivity(), AccountView {
         comment_account.setText(intent.getStringExtra("comment"))
     }
 
-    private fun changeMode(on: Boolean) {
+    override fun changeMode(on: Boolean) {
         doneButton.isVisible = on
         site_name_account.isEnabled = on
         site_url_account.isEnabled = on
@@ -81,7 +81,7 @@ class AccountActivity : MvpAppCompatActivity(), AccountView {
         )
     }
 
-    private fun showDialog(){
+    override fun showDialog(){
         AlertDialog.Builder(this)
             .setMessage("Вы уверены, что хотите удалить этот аккаунт?")
             .setPositiveButton("Да") { _: DialogInterface, _: Int ->

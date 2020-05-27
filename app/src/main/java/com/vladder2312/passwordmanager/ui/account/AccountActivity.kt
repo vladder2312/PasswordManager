@@ -25,7 +25,7 @@ class AccountActivity : MvpAppCompatActivity(), AccountView {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_account, menu)
-        doneButton = menu.getItem(1)
+        doneButton = menu.getItem(2)
         return true
     }
 

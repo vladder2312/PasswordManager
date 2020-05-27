@@ -21,7 +21,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/textColor"
             android:maxWidth="160dp"
             android:textSize="18sp"
             android:textStyle="bold"

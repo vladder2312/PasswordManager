@@ -18,6 +18,7 @@ class AddAccountActivity : MvpAppCompatActivity(), AddAccountView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
+        supportActionBar?.title = "Добавление аккаунта"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

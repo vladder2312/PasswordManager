@@ -2,6 +2,8 @@ package com.vladder2312.passwordmanager.ui.generator
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.vladder2312.passwordmanager.domain.Complexity
+import com.vladder2312.passwordmanager.utils.PasswordGenerator
 
 @InjectViewState
 class GeneratorPresenter : MvpPresenter<GeneratorView>() {
@@ -25,7 +27,7 @@ class GeneratorPresenter : MvpPresenter<GeneratorView>() {
     }
 
     fun russianChecked(isChecked: Boolean) {
-        model.digits = isChecked
+        model.russian = isChecked
     }
 
     fun englishChecked(isChecked: Boolean) {
@@ -35,18 +37,27 @@ class GeneratorPresenter : MvpPresenter<GeneratorView>() {
     fun complexitySelected(complexity: Int) {
         when (complexity) {
             0 -> {
-                model.comlexity = GeneratorModel.Complexity.RANDOM
+                model.comlexity = Complexity.RANDOM
             }
             1 -> {
-                model.comlexity = GeneratorModel.Complexity.SHIFT
+                model.comlexity = Complexity.SHIFT
             }
             2 -> {
-                model.comlexity = GeneratorModel.Complexity.BYKEY
+                model.comlexity = Complexity.BYKEY
             }
         }
     }
 
     fun generatePassword() {
-
+        val generator = PasswordGenerator(
+            model.length,
+            model.digits,
+            model.symbols,
+            model.russian,
+            model.english,
+            model.key,
+            model.comlexity
+        )
+        viewState.setPassword(generator.generate())
     }
 }

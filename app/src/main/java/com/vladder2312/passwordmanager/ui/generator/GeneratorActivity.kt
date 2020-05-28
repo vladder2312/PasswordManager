@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -43,6 +42,7 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
                     Activity.RESULT_OK,
                     Intent().putExtra("password", password_gen.text.toString())
                 )
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -109,5 +109,9 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
                 presenter.generatePassword()
             }
         }
+    }
+
+    override fun setPassword(password: String) {
+        password_gen.setText(password)
     }
 }

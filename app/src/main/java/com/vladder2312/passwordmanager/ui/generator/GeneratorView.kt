@@ -6,4 +6,5 @@ interface GeneratorView : MvpView {
 
     fun initViews()
     fun initListeners()
+    fun setPassword(password: String)
 }

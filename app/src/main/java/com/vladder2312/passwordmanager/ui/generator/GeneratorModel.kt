@@ -1,14 +1,12 @@
 package com.vladder2312.passwordmanager.ui.generator
 
+import com.vladder2312.passwordmanager.domain.Complexity
+
 
 class GeneratorModel {
 
-    enum class Complexity{
-        RANDOM, SHIFT, BYKEY
-    }
-
-    lateinit var key : String
-    lateinit var comlexity : Complexity
+    var comlexity = Complexity.RANDOM
+    var key = ""
     var length = 0
     var symbols = false
     var digits = false

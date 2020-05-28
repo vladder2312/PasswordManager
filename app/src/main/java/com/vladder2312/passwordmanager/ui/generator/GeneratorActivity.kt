@@ -1,8 +1,15 @@
 package com.vladder2312.passwordmanager.ui.generator
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -16,10 +23,8 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = "Генерация пароля"
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_generator)
+        initViews()
         initListeners()
     }
 
@@ -29,15 +34,47 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
         if (item.title == "Готово") {
-            TODO("Обработка нажатия на Готово")
+            if (password_gen.text.toString() != "") {
+                setResult(
+                    Activity.RESULT_OK,
+                    Intent().putExtra("password", password_gen.text.toString())
+                )
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun initViews() {
+        title = "Генерация пароля"
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val complexities = resources.getStringArray(R.array.complexities)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, complexities)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        complexity_spinner_gen.adapter = adapter
+        complexity_spinner_gen.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    presenter.complexitySelected(position)
+                }
+            }
+    }
+
     override fun initListeners() {
         length_gen.addTextChangedListener {
-            if(length_gen.text.toString() != ""){
+            if (length_gen.text.toString() != "") {
                 presenter.lengthChanged(Integer.parseInt(length_gen.text.toString()))
             } else {
                 presenter.lengthChanged(0)
@@ -58,11 +95,19 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
         eng_checkbox_gen.setOnCheckedChangeListener { _, isChecked ->
             presenter.englishChecked(isChecked)
         }
-        complexity_spinner_gen.setOnItemClickListener { _, _, position, _ ->
-            presenter.complexitySelected(position)
-        }
         generate_button_gen.setOnClickListener {
-            presenter.generatePassword()
+            if (!rus_checkbox_gen.isChecked && !eng_checkbox_gen.isChecked) {
+                Toast.makeText(applicationContext, "Выберите хотя бы один язык", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (length_gen.text.toString() == "" || length_gen.text.toString() == "0") {
+                Toast.makeText(applicationContext, "Введите длину пароля", Toast.LENGTH_SHORT)
+                    .show()
+            } else if (complexity_spinner_gen.selectedItemPosition != 0 && genkey_gen.text.toString() == "") {
+                Toast.makeText(applicationContext, "Введите ключ генерации", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                presenter.generatePassword()
+            }
         }
     }
 }

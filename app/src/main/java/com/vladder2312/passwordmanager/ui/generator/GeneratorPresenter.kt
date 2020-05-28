@@ -8,32 +8,32 @@ class GeneratorPresenter : MvpPresenter<GeneratorView>() {
 
     val model = GeneratorModel()
 
-    fun lengthChanged(length: Int){
+    fun lengthChanged(length: Int) {
         model.length = length
     }
 
-    fun keyChanged(key: String){
+    fun keyChanged(key: String) {
         model.key = key
     }
 
-    fun symbolsChecked(isChecked: Boolean){
+    fun symbolsChecked(isChecked: Boolean) {
         model.symbols = isChecked
     }
 
-    fun digitsChecked(isChecked: Boolean){
+    fun digitsChecked(isChecked: Boolean) {
         model.digits = isChecked
     }
 
-    fun russianChecked(isChecked: Boolean){
+    fun russianChecked(isChecked: Boolean) {
         model.digits = isChecked
     }
 
-    fun englishChecked(isChecked: Boolean){
+    fun englishChecked(isChecked: Boolean) {
         model.english = isChecked
     }
 
-    fun complexitySelected(complexity: Int){
-        when(complexity){
+    fun complexitySelected(complexity: Int) {
+        when (complexity) {
             0 -> {
                 model.comlexity = GeneratorModel.Complexity.RANDOM
             }
@@ -46,7 +46,7 @@ class GeneratorPresenter : MvpPresenter<GeneratorView>() {
         }
     }
 
-    fun generatePassword(){
+    fun generatePassword() {
 
     }
 }

@@ -22,7 +22,7 @@ class AddAccountActivity : MvpAppCompatActivity(), AddAccountView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
-        supportActionBar?.title = "Добавление аккаунта"
+        supportActionBar?.title = "Добавление"
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -35,6 +35,9 @@ class AddAccountActivity : MvpAppCompatActivity(), AddAccountView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
         if (item.title == "Готово") {
             val name = site_name_add_account.text.toString()
             val url = site_url_add_account.text.toString()

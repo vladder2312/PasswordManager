@@ -112,26 +112,11 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
                         ).show()
                     } else presenter.generatePassword()
                 }
-                1 -> {
-                    if (genkey_gen.text.toString() == "") {
+                1,2 -> {
+                    if (genkey_gen.text.toString().trim() == "") {
                         Toast.makeText(
                             applicationContext,
                             "Введите ключ генерации",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else presenter.generatePassword()
-                }
-                2 -> {
-                    if (genkey_gen.text.toString() == "") {
-                        Toast.makeText(
-                            applicationContext,
-                            "Введите ключ генерации",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else if (length_gen.text.toString() == "" || length_gen.text.toString() == "0") {
-                        Toast.makeText(
-                            applicationContext,
-                            "Введите длину пароля",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else presenter.generatePassword()

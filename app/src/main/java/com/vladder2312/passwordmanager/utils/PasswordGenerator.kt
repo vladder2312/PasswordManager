@@ -100,8 +100,55 @@ class PasswordGenerator(
 
     inner class ByKeyGenerator() {
 
+        init {
+            length = key!!.length
+        }
+
         fun generate(): String {
-            return ""
+            val password = mutableListOf<Char>()
+            key!!.toCharArray().toCollection(password)
+            shake(password)
+            inverse(password)
+            return password.joinToString(separator = "")
+        }
+
+        private fun shake(password: MutableList<Char>): MutableList<Char> {
+            for (i in 0 until length) {
+                val randomIndex = (0 until length).random()
+                val current = password[i]
+                password[i] = password[randomIndex]
+                password[randomIndex] = current
+            }
+            return password
+        }
+
+        private fun inverse(password: MutableList<Char>): MutableList<Char> {
+            var a: Int
+            var b: Int
+            var c: Int
+            loop@ for (i in 0 until length) {
+                c = password[i].toInt()
+                when (password[i]) {
+                    in '0'..'9' -> {
+                        a = '0'.toInt(); b = '9'.toInt()
+                    }
+                    in 'A'..'Z' -> {
+                        a = 'A'.toInt(); b = 'Z'.toInt()
+                    }
+                    in 'a'..'z' -> {
+                        a = 'a'.toInt(); b = 'z'.toInt()
+                    }
+                    in 'А'..'Я' -> {
+                        a = 'А'.toInt(); b = 'Я'.toInt()
+                    }
+                    in 'а'..'я' -> {
+                        a = 'а'.toInt(); b = 'я'.toInt()
+                    }
+                    else -> continue@loop
+                }
+                password[i] = (a + b - c).toChar()
+            }
+            return password
         }
     }
 }

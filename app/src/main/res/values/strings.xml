@@ -25,6 +25,6 @@
     <string-array name="complexities">
         <item>Случайно</item>
         <item>Сдвиг по алфавиту</item>
-        <item>Случайные преобразования ключа</item>
+        <item>Преобразование ключа</item>
     </string-array>
 </resources>

@@ -84,8 +84,17 @@ class PasswordGenerator(
 
     inner class ShiftGenerator() {
 
+        init {
+            length = key!!.length
+        }
+
         fun generate(): String {
-            return ""
+            val password = mutableListOf<Char>()
+            key!!.toCharArray().toCollection(password)
+            for (i in 0 until length) {
+                password[i] = password[i] + 3
+            }
+            return password.joinToString(separator = "")
         }
     }
 

@@ -96,17 +96,46 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
             presenter.englishChecked(isChecked)
         }
         generate_button_gen.setOnClickListener {
-            if (!rus_checkbox_gen.isChecked && !eng_checkbox_gen.isChecked) {
-                Toast.makeText(applicationContext, "Выберите хотя бы один язык", Toast.LENGTH_SHORT)
-                    .show()
-            } else if (length_gen.text.toString() == "" || length_gen.text.toString() == "0") {
-                Toast.makeText(applicationContext, "Введите длину пароля", Toast.LENGTH_SHORT)
-                    .show()
-            } else if (complexity_spinner_gen.selectedItemPosition != 0 && genkey_gen.text.toString() == "") {
-                Toast.makeText(applicationContext, "Введите ключ генерации", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                presenter.generatePassword()
+            when (complexity_spinner_gen.selectedItemPosition) {
+                0 -> {
+                    if (length_gen.text.toString() == "" || length_gen.text.toString() == "0") {
+                        Toast.makeText(
+                            applicationContext,
+                            "Введите длину пароля",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (!rus_checkbox_gen.isChecked && !eng_checkbox_gen.isChecked) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Выберите хотя бы один язык",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else presenter.generatePassword()
+                }
+                1 -> {
+                    if (genkey_gen.text.toString() == "") {
+                        Toast.makeText(
+                            applicationContext,
+                            "Введите ключ генерации",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else presenter.generatePassword()
+                }
+                2 -> {
+                    if (genkey_gen.text.toString() == "") {
+                        Toast.makeText(
+                            applicationContext,
+                            "Введите ключ генерации",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (length_gen.text.toString() == "" || length_gen.text.toString() == "0") {
+                        Toast.makeText(
+                            applicationContext,
+                            "Введите длину пароля",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else presenter.generatePassword()
+                }
             }
         }
     }

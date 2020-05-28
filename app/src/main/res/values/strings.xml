@@ -21,4 +21,10 @@
     <string name="rus">Русские</string>
     <string name="complexity">Сложность</string>
     <string name="generation_key">Ключ генерации</string>
+    
+    <string-array name="complexities">
+        <item>Случайно</item>
+        <item>Сдвиг по алфавиту</item>
+        <item>На основе ключа</item>
+    </string-array>
 </resources>

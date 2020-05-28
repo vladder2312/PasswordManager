@@ -25,6 +25,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="number"
+        tools:text="10"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="AutoFill, LabelFor" />
@@ -92,6 +93,7 @@
 
     <Spinner
         android:id="@+id/complexity_spinner_gen"
+        android:entries="@array/complexities"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"

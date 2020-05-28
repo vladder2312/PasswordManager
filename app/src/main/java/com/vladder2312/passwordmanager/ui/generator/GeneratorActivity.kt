@@ -3,9 +3,11 @@ package com.vladder2312.passwordmanager.ui.generator
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.widget.addTextChangedListener
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.vladder2312.passwordmanager.R
+import kotlinx.android.synthetic.main.activity_generator.*
 
 class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
 
@@ -33,7 +35,34 @@ class GeneratorActivity : MvpAppCompatActivity(), GeneratorView {
         return super.onOptionsItemSelected(item)
     }
 
-    fun initListeners() {
-        TODO("Обработка нажатия на Сгенерировать")
+    override fun initListeners() {
+        length_gen.addTextChangedListener {
+            if(length_gen.text.toString() != ""){
+                presenter.lengthChanged(Integer.parseInt(length_gen.text.toString()))
+            } else {
+                presenter.lengthChanged(0)
+            }
+        }
+        genkey_gen.addTextChangedListener {
+            presenter.keyChanged(it.toString())
+        }
+        symbols_checkbox_gen.setOnCheckedChangeListener { _, isChecked ->
+            presenter.symbolsChecked(isChecked)
+        }
+        digits_checkbox_gen.setOnCheckedChangeListener { _, isChecked ->
+            presenter.digitsChecked(isChecked)
+        }
+        rus_checkbox_gen.setOnCheckedChangeListener { _, isChecked ->
+            presenter.russianChecked(isChecked)
+        }
+        eng_checkbox_gen.setOnCheckedChangeListener { _, isChecked ->
+            presenter.englishChecked(isChecked)
+        }
+        complexity_spinner_gen.setOnItemClickListener { _, _, position, _ ->
+            presenter.complexitySelected(position)
+        }
+        generate_button_gen.setOnClickListener {
+            presenter.generatePassword()
+        }
     }
 }
